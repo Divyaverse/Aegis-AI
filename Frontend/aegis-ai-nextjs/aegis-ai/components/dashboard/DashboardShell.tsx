@@ -33,6 +33,8 @@ export function DashboardShell() {
     alerts,
     triggerAttack,
     resetSimulation,
+    mode,
+    isConnected,
   } = useSimulation();
 
   // 🤫 Secret Presentation Trigger (Ctrl + Shift + A)
@@ -91,6 +93,14 @@ export function DashboardShell() {
           <div className="flex items-center gap-8 text-sm font-medium text-text-secondary">
             <span className="hover:text-white cursor-pointer transition-colors">Global System Health</span>
             <span className="text-brand-cyan border-b-2 border-brand-cyan pb-1">Active Threat Level</span>
+            <span className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase border ${
+              isConnected
+                ? "border-[#34d399]/30 bg-[#34d399]/10 text-[#34d399]"
+                : "border-[#fbbf24]/30 bg-[#fbbf24]/10 text-[#fbbf24]"
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? "bg-[#34d399] animate-pulse" : "bg-[#fbbf24]"}`}></span>
+              {isConnected ? "LIVE" : "SIM"}
+            </span>
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right">

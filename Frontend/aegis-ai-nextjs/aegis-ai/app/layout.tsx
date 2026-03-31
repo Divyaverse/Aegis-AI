@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Aegis.AI — Neuro-Behavioral Anti-Bot Defense",
   description:
-    "Real-time detection of automated attacks on FinTech platforms using behavioral AI and Isolation Forest anomaly detection. Team Leviosa — HackUp 2026.",
+    "Real-time detection of automated attacks on FinTech platforms using behavioral AI and Isolation Forest anomaly detection. Team Leviosa — Hackovium 2026.",
   keywords: ["cybersecurity", "bot detection", "fintech", "AI", "behavioral analysis"],
 };
 

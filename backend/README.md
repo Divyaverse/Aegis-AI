@@ -1,67 +1,125 @@
-# 🛡️ Aegis.AI — Backend Engine
+# 🖥️ Aegis.AI — Backend Engine
 
-> **The Behavioral Threat Intelligence Hub.** 
-> Connecting ML detection to real-time defense.
+> The orchestration layer that connects the ML brain to the frontend dashboard.
 
----
+<br />
 
-## 🚀 Impact Summary
-This backend isn't just a middleware; it's a **proactive security system** designed for high-frequency attack detection. 
+## Overview
 
-*   **Behavioral Brain:** Connects to Python ML Engine for anomaly scoring.
-*   **Active Defense:** Automatic IP blocking for scores > 90.
-*   **Live Intelligence:** Real-time Socket.IO alerts and Bot Cluster detection.
-*   **Silent Insight:** Integrated Geo-IP for visual threat mapping.
+This is the **Node.js/Express** backend that handles:
 
----
+- Receiving login attempts and forwarding behavioral data to the ML engine
+- Auto-blocking malicious IPs based on ML risk scores
+- Broadcasting real-time threat alerts via Socket.IO
+- Providing dashboard APIs for stats, graphs, and alert history
+- Simulating attack traffic for hackathon demos
 
-## 🛠️ Tech Stack
-| Core | Security | Utils |
-| :--- | :--- | :--- |
-| **Node.js** v20+ | **Helmet.js** (CSP/XSS) | **Socket.IO** (Live) |
-| **Express** | **Rate Limiters** (DoS Protection) | **UUID** (Req-Tracking) |
-| **DB Fallback** | **Auto-Block Middleware** | **Geo-IP Mapper** |
+<br />
 
----
+## Architecture
 
-## 🔗 Key API Endpoints
+```
+Frontend (3000)
+    │
+    ▼
+┌──────────────────────────────┐
+│        Express Server        │
+│          (Port 5000)         │
+├──────────────────────────────┤
+│                              │
+│  Middleware                  │
+│  ├── Helmet (Security)       │
+│  ├── CORS                    │
+│  ├── Rate Limiter (100/min)  │
+│  └── Request ID Tracking     │
+│                              │
+│  Routes                      │
+│  ├── POST /auth/login        │
+│  ├── GET  /dashboard         │
+│  ├── GET  /graph-data        │
+│  ├── GET  /alerts            │
+│  ├── POST /simulate/traffic  │
+│  └── GET  /docs              │
+│                              │
+│  Services                    │
+│  ├── mlService.js  ──────────┼──▶  ML Engine (8000)
+│  └── notificationService.js  │
+│                              │
+│  Store                       │
+│  └── memoryStore.js          │
+│                              │
+└──────────────────────────────┘
+    │
+    ▼
+Socket.IO ──▶ Frontend (Live Alerts)
+```
 
-### 🚥 Analysis & Defense
-*   `POST /auth/login` → Capture behavior and predict risk.
-*   `GET /auth/blocked` → List currently blocked threat actors.
+<br />
 
-### 📋 Intelligence & Dashboard
-*   `GET /dashboard` → Aggregate stats, trends, and top attackers.
-*   `GET /graph-data` → Network visualization (Nodes, Links, & Clusters).
-*   `GET /alerts` → Filtered high-risk events.
+## API Endpoints
 
-### 📄 Developer Tools
-*   `GET /docs` → **Upgraded:** Beautiful HTML API documentation.
-*   `POST /simulate/traffic` → Demo simulation engine.
+### Authentication
 
----
+| Method | Route | Description |
+|:-------|:------|:------------|
+| `POST` | `/auth/login` | Analyze a login attempt via ML engine |
+| `GET` | `/auth/blocked` | List all currently blocked IPs |
 
-## ⚡ Setup & Run
+### Dashboard
+
+| Method | Route | Description |
+|:-------|:------|:------------|
+| `GET` | `/dashboard` | Full dashboard payload (stats, logs, alerts, timeline) |
+| `GET` | `/graph-data` | Network graph nodes + links for visualization |
+| `GET` | `/alerts` | High-risk activity history |
+| `GET` | `/alerts?level=attack` | Attack-only alerts |
+
+### Simulation
+
+| Method | Route | Description |
+|:-------|:------|:------------|
+| `POST` | `/simulate/traffic?count=50` | Generate simulated traffic for demo |
+| `DELETE` | `/simulate/reset` | Clear all data for a fresh demo |
+
+<br />
+
+## Socket.IO Events
+
+The backend emits real-time events to connected frontends:
+
+| Event | Trigger | Payload |
+|:------|:--------|:--------|
+| `new_log` | Every login attempt | `{ log_id, user_id, ip, risk, score, reasons }` |
+| `threat_alert` | Risk ≥ Suspicious | `{ type, severity, ip, score, blocked }` |
+| `stats_update` | After each analysis | `{ total_requests, attack_count, blocked_ips_count }` |
+
+<br />
+
+## Quick Start
 
 ```bash
-# 1. Install
 npm install
-
-# 2. Configure (.env)
-USE_MONGO=false
-ML_API_URL=http://localhost:8000
-
-# 3. Launch
 npm run dev
 ```
 
+The server will start at `http://localhost:5000`.
+
+<br />
+
+## Dependencies
+
+| Package | Purpose |
+|:--------|:--------|
+| `express` | HTTP server framework |
+| `socket.io` | Real-time WebSocket communication |
+| `axios` | HTTP client for ML engine calls |
+| `helmet` | Security headers |
+| `express-rate-limit` | Brute-force protection |
+| `cors` | Cross-origin resource sharing |
+| `morgan` | HTTP request logging |
+
+<br />
+
 ---
 
-## 🧪 Simulation Command
-**To populate the dashboard for your demo:**
-```bash
-npm run simulate
-```
-
----
-*Aegis.AI Architecture v1.0*
+*Aegis.AI Backend v1.0*

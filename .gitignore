@@ -2,36 +2,37 @@
 node_modules/
 package-lock.json
 npm-debug.log
+
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.pyc
 .venv/
 env/
 venv/
-__pycache__/
-*.pyc
 
-# ── Environment ──────────────────────────────────────────
+# ── Environment Variables (NEVER push secrets) ───────────
 .env
 .env.local
 .env.production
 
-# ── Build/Output ─────────────────────────────────────────
+# ── Build Artifacts ──────────────────────────────────────
 dist/
 build/
 .next/
+out/
 *.log
 
 # ── OS & IDE ──────────────────────────────────────────────
 .DS_Store
-.vscode/
 Thumbs.db
 
-# ── Aegis-Specific (Model Artifacts) ───────────────────────
-# We don't push the actual model file to keep the repo clean
+# ── ML Model Artifacts (regenerated on each machine) ─────
 ML/models/*.pkl
 ML/data/raw/*.csv
 ML/data/*.csv
 
-# ── Subfolder Cleanup ─────────────────────────────────────
-# Ensures we don't accidentally push node_modules if we run npm in root
+# ── Deep Cleanup ──────────────────────────────────────────
 **/node_modules/
 **/__pycache__/
 **/dist/
+**/.next/
