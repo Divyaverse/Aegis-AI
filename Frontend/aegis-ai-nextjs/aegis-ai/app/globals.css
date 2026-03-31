@@ -1,0 +1,161 @@
+/* ── Enterprise Fonts ──────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Modern Enterprise Color Palette (Zinc/Slate Base) ─────────────────────── */
+:root {
+  --bg-void: #09090b;       /* Zinc 950 - Deepest background */
+  --bg-panel: #18181b;      /* Zinc 900 - Main panels */
+  --bg-card: #27272a;       /* Zinc 800 - Inner cards */
+  
+  --border: #3f3f46;        /* Zinc 700 - Subtle borders */
+  --border-bright: #52525b; /* Zinc 600 - Hover borders */
+  
+  /* Professional SaaS Accents instead of glaring neon */
+  --accent-cyan: #3b82f6;   /* Blue 500 */
+  --accent-red: #ef4444;    /* Red 500 */
+  --accent-orange: #f97316; /* Orange 500 */
+  --accent-green: #10b981;  /* Emerald 500 */
+  --accent-yellow: #eab308; /* Yellow 500 */
+  
+  --text-primary: #fafafa;  /* Zinc 50 */
+  --text-muted: #a1a1aa;    /* Zinc 400 */
+  --text-dim: #71717a;      /* Zinc 500 */
+
+  --font-syne: 'Syne', sans-serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+  --font-space: 'Inter', sans-serif; /* Replaced Space Mono with Inter for cleaner numbers */
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* ── Base Reset ────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Clean Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+
+/* ── Typography Utilities ──────────────────────────────────────────────────── */
+.font-syne   { font-family: var(--font-syne); }
+.font-mono   { font-family: var(--font-jetbrains); }
+.font-space  { font-family: var(--font-space); }
+
+/* ── Smooth Glows (Replaced harsh neon) ────────────────────────────────────── */
+.glow-cyan   { filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4)); }
+.glow-red    { filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.4)); }
+.glow-green  { filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4)); }
+.glow-orange { filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.4)); }
+
+/* ── Modern Panel & Card Base ──────────────────────────────────────────────── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+/* ── Clean Backgrounds (Removed hex grid) ──────────────────────────────────── */
+.hex-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Smooth Animations (Removed harsh glitches) ────────────────────────────── */
+@keyframes aegisFadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes aegisSlideIn {
+  from { transform: translateX(15px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@keyframes aegisBarGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.animate-blink      { animation: pulseSoft 2s ease-in-out infinite; }
+.animate-fast-blink { animation: pulseSoft 1s ease-in-out infinite; }
+.animate-fade-up    { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-in   { animation: aegisSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-glitch     { /* Removed glitch effect for professionalism */ }
+.animate-shield     { animation: pulseSoft 3s ease-in-out infinite; }
+.animate-bar-grow   { animation: aegisBarGrow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: left; }
+
+.stagger-1 { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
+.stagger-2 { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both; }
+.stagger-3 { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+.stagger-4 { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.20s both; }
+.stagger-5 { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+.stagger-6 { animation: aegisFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both; }
+
+.scan-line { display: none; /* Removed CRT scanline */ }
+
+/* ── Modern Threat Pill Badges ─────────────────────────────────────────────── */
+.pill-critical { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; border-radius: 9999px; }
+.pill-high     { background: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #f97316; border-radius: 9999px; }
+.pill-medium   { background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.2); color: #eab308; border-radius: 9999px; }
+.pill-low      { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #3b82f6; border-radius: 9999px; }
+.pill-safe     { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981; border-radius: 9999px; }
+
+/* ── Professional SaaS Buttons ─────────────────────────────────────────────── */
+.btn-danger {
+  background: #ef4444; color: white; border: none; font-family: var(--font-sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.5px; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+}
+.btn-danger:hover:not(:disabled) { background: #dc2626; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+.btn-danger:disabled { background: rgba(239, 68, 68, 0.5); cursor: not-allowed; }
+
+.btn-primary {
+  background: #3b82f6; color: white; border: none; font-family: var(--font-sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.5px; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary:hover { background: #2563eb; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+
+.btn-ghost {
+  background: transparent; border: 1px solid var(--border); color: var(--text-muted); font-family: var(--font-sans);
+  font-size: 12px; font-weight: 500; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { background: var(--bg-card); color: var(--text-primary); border-color: var(--border-bright); }
+
+/* ── Recharts Clean Overrides ──────────────────────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 12px !important;
+  color: var(--text-primary) !important;
+}
+.recharts-cartesian-grid-horizontal line, .recharts-cartesian-grid-vertical line {
+  stroke: var(--border) !important; stroke-opacity: 0.4 !important;
+}
+.recharts-xAxis .recharts-text, .recharts-yAxis .recharts-text {
+  fill: var(--text-muted) !important; font-family: var(--font-jetbrains) !important; font-size: 10px !important;
+}
