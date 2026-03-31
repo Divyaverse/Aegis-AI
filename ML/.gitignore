@@ -1,4 +1,11 @@
 __pycache__/
 *.pyc
-models/
-data/
+.venv/
+env/
+venv/
+data/raw/*.csv
+data/*.csv
+models/*.pkl
+scaler.pkl
+audit_report.md
+integration_test.py

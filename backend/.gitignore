@@ -1,10 +1,6 @@
 node_modules/
 .env
+npm-debug.log
+logs/
 *.log
-npm-debug.log*
-.DS_Store
-Thumbs.db
-saved_models/
-coverage/
-.nyc_output/
-dist/
+*.sqlite
