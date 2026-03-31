@@ -6,7 +6,7 @@
 ---
 
 ## 🚀 Impact Summary
-This backend isn't just a middleware; it's a **pro-active security system** designed for high-frequency attack detection. 
+This backend isn't just a middleware; it's a **proactive security system** designed for high-frequency attack detection. 
 
 *   **Behavioral Brain:** Connects to Python ML Engine for anomaly scoring.
 *   **Active Defense:** Automatic IP blocking for scores > 90.
@@ -64,4 +64,4 @@ npm run simulate
 ```
 
 ---
-*Built for the 12-hour Hackathon Sprint. Aegis.AI Architecture v1.0*
+*Aegis.AI Architecture v1.0*
