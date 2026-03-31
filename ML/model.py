@@ -55,6 +55,11 @@ def predict(data_point):
     Input: [time_gap, request_rate, same_ip]
     Output: risk label + dynamic score + reasons
     """
+    # Protect against missing files by dynamically retraining
+    if not os.path.exists("models/behavior_model.pkl") or not os.path.exists("models/scaler.pkl"):
+        print("⚠️ Models missing! Auto-healing by running train_model()...")
+        train_model()
+
     # Load assets
     model = joblib.load("models/behavior_model.pkl")
     scaler = joblib.load("models/scaler.pkl")
